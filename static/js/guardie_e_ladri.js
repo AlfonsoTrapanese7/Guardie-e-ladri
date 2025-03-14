@@ -166,3 +166,46 @@ function ritenta(){
 function nextLevel(){
     location.reload();
 }
+
+let stanza = document.getElementById("stanza");
+let x = stanza.clientWidth;
+let y = stanza.clientHeight;
+
+document.addEventListener("keydown", moveWASD);
+
+function moveWASD(evento) {
+    if (detectCollision == true){
+        keyboardEnabled;
+    } else{
+    let tasto = evento.keyCode;
+
+    let est = guard.style.left;
+    let nord = guard.style.top;
+
+    if (tasto == 68 || tasto == 39) { // D
+        est = Number(est.substring(0, est.length - 2)) + 50;
+        if (est < x - guard.clientWidth) {
+            guard.style.left = est + "px";
+        }
+    } else if (tasto == 65 || tasto == 37) { // A
+        est = Number(est.substring(0, est.length - 2)) - 50;
+        if (est >= 0) {
+            guard.style.left = est + "px";
+        }
+    } else if (tasto == 87 || tasto == 38 ) { // W
+        nord = Number(nord.substring(0, nord.length - 2)) - 50;
+        if (nord >= 0) {
+            guard.style.top = nord + "px";
+        }
+    } else if (tasto == 83 || tasto == 40 ) { // S
+        nord = Number(nord.substring(0, nord.length - 2)) + 50;
+        if (nord < y - guard.clientHeight) {
+            guard.style.top = nord + "px";
+        }
+    }
+
+    moveThief();
+    detectCollision();
+    updateMoves();
+    }
+}
