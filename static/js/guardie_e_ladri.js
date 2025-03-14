@@ -13,7 +13,7 @@ function moveNord() {
     move(guard, 0);
     moveThief();
     detectCollision();
-    nMoves++;
+    updateMoves();
 }
 
 function moveEst() {
@@ -21,7 +21,7 @@ function moveEst() {
     move(guard, 1);
     moveThief();
     detectCollision();
-    nMoves++;
+    updateMoves();
 }
 
 function moveSud() {
@@ -29,7 +29,7 @@ function moveSud() {
     move(guard, 2);
     moveThief();
     detectCollision();
-    nMoves++;
+    updateMoves();
 }
 
 function moveOvest() {
@@ -37,7 +37,7 @@ function moveOvest() {
     move(guard, 3);
     moveThief();
     detectCollision();
-    nMoves++;
+    updateMoves();
 }
 
 function updateGameState() {
@@ -50,7 +50,6 @@ function move(element, direction){
 
     let moved = true;
     
-    console.log(nMoves);
     let positionLeft = parseInt(element.style.left.substring(0, element.style.left.length-2));
     let positionTop = parseInt(element.style.top.substring(0, element.style.top.length-2));
 
@@ -128,6 +127,20 @@ function detectCollision() {
 
 }
 
+function updateMoves() {
+
+    nMoves++;
+
+    console.log(nMoves);
+    if(nMoves == 20) {
+
+        setButtonDisabled(true);
+        
+        setTimeout(() => alert("HAI PERSO"), 10);
+    }
+
+    document.getElementById("esito").innerHTML = "Numero mosse: " + nMoves;
+}
 
 function setButtonDisabled(disabled) {
 
