@@ -22,7 +22,7 @@ body {
 	height: 502px;
 	float: left;
 	border: 2px solid rgb(0, 0, 0);
-	background-image: url("../imgs/background-1.jpg"); 
+	/*background-image: url("../imgs/background-1.jpg"); */
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
