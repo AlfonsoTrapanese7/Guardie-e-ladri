@@ -7,6 +7,8 @@ document.getElementById("nord").addEventListener("click", moveNord);
 document.getElementById("est").addEventListener("click", moveEst);
 document.getElementById("sud").addEventListener("click", moveSud);
 document.getElementById("ovest").addEventListener("click", moveOvest);
+document.getElementById("ritenta").addEventListener("click", ritenta);
+document.getElementById("nextLevel").addEventListener("click", nextLevel);
 
 function moveNord() {
     
@@ -122,6 +124,8 @@ function detectCollision() {
         setButtonDisabled(true);
         
         setTimeout(() => alert("HAI VINTO"), 10);
+        document.getElementById("pulsanti").style.display = "none";
+        document.getElementById("pulsante3").style.display = "block";
         
     }
 
@@ -137,9 +141,12 @@ function updateMoves() {
         setButtonDisabled(true);
         
         setTimeout(() => alert("HAI PERSO"), 10);
+        document.getElementById("pulsanti").style.display = "none";
+        document.getElementById("pulsante2").style.display = "block";
     }
 
     document.getElementById("esito").innerHTML = "Numero mosse: " + nMoves;
+    
 }
 
 function setButtonDisabled(disabled) {
@@ -150,4 +157,55 @@ function setButtonDisabled(disabled) {
         buttons[i].disabled = disabled;
    }
 
+}
+
+function ritenta(){
+    location.reload();
+}
+
+function nextLevel(){
+    location.reload();
+}
+
+let stanza = document.getElementById("stanza");
+let x = stanza.clientWidth;
+let y = stanza.clientHeight;
+
+document.addEventListener("keydown", moveWASD);
+
+function moveWASD(evento) {
+    if (detectCollision == true){
+        keyboardEnabled;
+    } else{
+    let tasto = evento.keyCode;
+
+    let est = guard.style.left;
+    let nord = guard.style.top;
+
+    if (tasto == 68 || tasto == 39) { // D
+        est = Number(est.substring(0, est.length - 2)) + 50;
+        if (est < x - guard.clientWidth) {
+            guard.style.left = est + "px";
+        }
+    } else if (tasto == 65 || tasto == 37) { // A
+        est = Number(est.substring(0, est.length - 2)) - 50;
+        if (est >= 0) {
+            guard.style.left = est + "px";
+        }
+    } else if (tasto == 87 || tasto == 38 ) { // W
+        nord = Number(nord.substring(0, nord.length - 2)) - 50;
+        if (nord >= 0) {
+            guard.style.top = nord + "px";
+        }
+    } else if (tasto == 83 || tasto == 40 ) { // S
+        nord = Number(nord.substring(0, nord.length - 2)) + 50;
+        if (nord < y - guard.clientHeight) {
+            guard.style.top = nord + "px";
+        }
+    }
+
+    moveThief();
+    detectCollision();
+    updateMoves();
+    }
 }
