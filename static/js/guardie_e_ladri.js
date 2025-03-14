@@ -127,9 +127,10 @@ function updateMoves() { // conta le mosse effettuate e le mostra a schermo, in 
 
         setButtonDisabled(true);
         
-        setTimeout(() => alert("HAI PERSO"), 10);
         document.getElementById("pulsanti").style.display = "none";
         document.getElementById("pulsante2").style.display = "block";
+        document.getElementById("guardia-sprite").src = "static/imgs/guard-exhausted.png";
+        setTimeout(() => alert("HAI PERSO"), 100);
     }
 
     document.getElementById("esito").innerHTML = "Numero mosse: " + nMoves;
