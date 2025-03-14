@@ -1,7 +1,7 @@
-
 let guard = document.getElementById("guardia");
 let thief = document.getElementById("ladro");
 let nMoves = 20; // contatore di mosse
+let gameOver = false; // variabile di stato per indicare se il gioco è terminato
 
 document.getElementById("nord").addEventListener("click", moveNord);
 document.getElementById("est").addEventListener("click", moveEst);
@@ -11,7 +11,7 @@ document.getElementById("ritenta").addEventListener("click", ritenta);
 document.getElementById("nextLevel").addEventListener("click", nextLevel);
 //Le quattro funzioni che gestiscono i bottoni all' evento click
 function moveNord() {
-    
+    if (gameOver) return;
     move(guard, 0);
     moveThief();
     detectCollision();
@@ -19,7 +19,7 @@ function moveNord() {
 }
 
 function moveEst() {
-    
+    if (gameOver) return;
     move(guard, 1);
     moveThief();
     detectCollision();
@@ -27,7 +27,7 @@ function moveEst() {
 }
 
 function moveSud() {
-
+    if (gameOver) return;
     move(guard, 2);
     moveThief();
     detectCollision();
@@ -35,7 +35,7 @@ function moveSud() {
 }
 
 function moveOvest() {
-
+    if (gameOver) return;
     move(guard, 3);
     moveThief();
     detectCollision();
@@ -109,7 +109,7 @@ function detectCollision() { // controlla se il ladro è stato catturato e in ca
     if(gLeft == tLeft && gTop == tTop)
     {
         setButtonDisabled(true);
-        
+        gameOver = true; // Imposta gameOver a true
         document.getElementById("pulsanti").style.display = "none";
         document.getElementById("pulsante3").style.display = "block";
         document.getElementById("guardia-sprite").src = "static/imgs/won-pose.png";
@@ -128,7 +128,7 @@ function updateMoves() { // conta le mosse effettuate e le mostra a schermo, in 
     if(nMoves == 0) {
 
         setButtonDisabled(true);
-        
+        gameOver = true; // Imposta gameOver a true
         document.getElementById("pulsanti").style.display = "none";
         document.getElementById("pulsante2").style.display = "block";
         document.getElementById("guardia-sprite").src = "static/imgs/guard-exhausted.png";
@@ -137,7 +137,6 @@ function updateMoves() { // conta le mosse effettuate e le mostra a schermo, in 
     }
 
     document.getElementById("esito").innerHTML = "Numero mosse: " + nMoves;
-    
 }
 
 function startThiefEscape() {
@@ -179,6 +178,10 @@ let y = stanza.clientHeight;
 document.addEventListener("keydown", moveWASD);
 
 function moveWASD(evento) {
+    if (gameOver) { // Controlla se il gioco è terminato
+        return;
+    }
+    
     let tasto = evento.keyCode;
     let est = guard.style.left;
     let nord = guard.style.top;
