@@ -7,6 +7,8 @@ document.getElementById("nord").addEventListener("click", moveNord);
 document.getElementById("est").addEventListener("click", moveEst);
 document.getElementById("sud").addEventListener("click", moveSud);
 document.getElementById("ovest").addEventListener("click", moveOvest);
+document.getElementById("ritenta").addEventListener("click", ritenta);
+document.getElementById("nextLevel").addEventListener("click", nextLevel);
 
 function moveNord() {
     
@@ -122,6 +124,8 @@ function detectCollision() {
         setButtonDisabled(true);
         
         setTimeout(() => alert("HAI VINTO"), 10);
+        document.getElementById("pulsanti").style.display = "none";
+        document.getElementById("pulsante3").style.display = "block";
         
     }
 
@@ -137,9 +141,12 @@ function updateMoves() {
         setButtonDisabled(true);
         
         setTimeout(() => alert("HAI PERSO"), 10);
+        document.getElementById("pulsanti").style.display = "none";
+        document.getElementById("pulsante2").style.display = "block";
     }
 
     document.getElementById("esito").innerHTML = "Numero mosse: " + nMoves;
+    
 }
 
 function setButtonDisabled(disabled) {
@@ -150,4 +157,12 @@ function setButtonDisabled(disabled) {
         buttons[i].disabled = disabled;
    }
 
+}
+
+function ritenta(){
+    location.reload();
+}
+
+function nextLevel(){
+    location.reload();
 }
