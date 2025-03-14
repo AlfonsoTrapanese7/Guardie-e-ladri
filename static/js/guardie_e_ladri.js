@@ -1,7 +1,7 @@
 
 let guard = document.getElementById("guardia");
 let thief = document.getElementById("ladro");
-let nMoves = 0; // contatore di mosse
+let nMoves = 20; // contatore di mosse
 
 document.getElementById("nord").addEventListener("click", moveNord);
 document.getElementById("est").addEventListener("click", moveEst);
@@ -120,10 +120,12 @@ function detectCollision() { // controlla se il ladro è stato catturato e in ca
 
 function updateMoves() { // conta le mosse effettuate e le mostra a schermo, in caso le mosse siano finite annuncia la sconfitta della guardia e disabilita i bottoni
 
-    nMoves++;
+    if (nMoves > 0) {
+        nMoves--;
+    }
 
     console.log(nMoves);
-    if(nMoves == 20) {
+    if(nMoves == 0) {
 
         setButtonDisabled(true);
         
