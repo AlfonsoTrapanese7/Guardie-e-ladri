@@ -1,7 +1,7 @@
 
 let guard = document.getElementById("guardia");
 let thief = document.getElementById("ladro");
-let nMoves = 0;
+let nMoves = 0; // contatore di mosse
 
 document.getElementById("nord").addEventListener("click", moveNord);
 document.getElementById("est").addEventListener("click", moveEst);
@@ -9,7 +9,7 @@ document.getElementById("sud").addEventListener("click", moveSud);
 document.getElementById("ovest").addEventListener("click", moveOvest);
 document.getElementById("ritenta").addEventListener("click", ritenta);
 document.getElementById("nextLevel").addEventListener("click", nextLevel);
-
+//Le quattro funzioni che gestiscono i bottoni all' evento click
 function moveNord() {
     
     move(guard, 0);
@@ -42,13 +42,9 @@ function moveOvest() {
     updateMoves();
 }
 
-function updateGameState() {
-
-}
-
 //element = elemento da muovere
 // direction nord = 0,  est = 1, sud = 2, ovest = 3 
-function move(element, direction){
+function move(element, direction){ // funzione che prova a muovere un elemento passato da parametro, ritorna true/false in base all'esito
 
     let moved = true;
     
@@ -96,13 +92,13 @@ function move(element, direction){
     return moved;
 }
 
-function getRandomDirection() {
+function getRandomDirection() { // randomizza le direzioni da 0 a 3
 
     let randomDirection = Math.floor(Math.random()*4);
     return randomDirection;
 }
 
-function moveThief() {
+function moveThief() { // movimento randomico del ladro che evita di muoversi contro il muro
     let hasMoved = false;
     while(hasMoved == false) {
 
@@ -111,7 +107,7 @@ function moveThief() {
     }
 }
 
-function detectCollision() {
+function detectCollision() { // controlla se il ladro è stato catturato e in caso positivo disabilita i bottoni e comunica la vittoria della guardia
 
     let gLeft = parseInt(guard.style.left.substring(0, guard.style.left.length-2));
     let gTop = parseInt(guard.style.top.substring(0, guard.style.top.length-2));
@@ -128,10 +124,9 @@ function detectCollision() {
         document.getElementById("pulsante3").style.display = "block";
         
     }
-
 }
 
-function updateMoves() {
+function updateMoves() { // conta le mosse effettuate e le mostra a schermo, in caso le mosse siano finite annuncia la sconfitta della guardia e disabilita i bottoni
 
     nMoves++;
 
@@ -149,7 +144,7 @@ function updateMoves() {
     
 }
 
-function setButtonDisabled(disabled) {
+function setButtonDisabled(disabled) { // disabilita/abilita i bottoni in base al parametro (true = disabilita, false = abilita)
 
    let buttons = document.getElementsByClassName("pulsante");
 
@@ -159,7 +154,7 @@ function setButtonDisabled(disabled) {
 
 }
 
-function ritenta(){
+function ritenta(){ // ricarica la pagina
     location.reload();
 }
 
@@ -167,13 +162,13 @@ function nextLevel(){
     location.reload();
 }
 
-let stanza = document.getElementById("stanza");
+let stanza = document.getElementById("stanza"); 
 let x = stanza.clientWidth;
 let y = stanza.clientHeight;
 
 document.addEventListener("keydown", moveWASD);
 
-function moveWASD(evento) {
+function moveWASD(evento) { // funzione che gestisce gli input di movimento da tastiera con tasti WASD oppure con le freccette
     if (detectCollision == true){
         keyboardEnabled;
     } else{
