@@ -119,10 +119,11 @@ function detectCollision() { // controlla se il ladro è stato catturato e in ca
     {
         setButtonDisabled(true);
         
-        setTimeout(() => alert("HAI VINTO"), 10);
         document.getElementById("pulsanti").style.display = "none";
         document.getElementById("pulsante3").style.display = "block";
-        
+        document.getElementById("guardia-sprite").src = "static/imgs/won-pose.png";
+        thief.style.display = "none";
+        setTimeout(() => alert("HAI VINTO"), 100);
     }
 }
 
