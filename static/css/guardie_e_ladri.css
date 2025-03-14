@@ -139,7 +139,6 @@ body {
     letter-spacing: 2px;
     cursor: pointer;
     border-radius: 8px;
-    box-shadow: 0 4px #111, 0 8px #000 inset;
     transition: 0.1s ease-in-out;
     text-align: center;
     display: inline-block;
@@ -170,7 +169,6 @@ body {
     letter-spacing: 2px;
     cursor: pointer;
     border-radius: 8px;
-    box-shadow: 0 4px #002200, 0 8px #000 inset;
     transition: 0.1s ease-in-out;
     text-align: center;
     display: inline-block;
