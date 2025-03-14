@@ -44,49 +44,40 @@ function moveOvest() {
 
 //element = elemento da muovere
 // direction nord = 0,  est = 1, sud = 2, ovest = 3 
-function move(element, direction){ // funzione che prova a muovere un elemento passato da parametro, ritorna true/false in base all'esito
-
+function move(element, direction) {
     let moved = true;
     
     let positionLeft = parseInt(element.style.left.substring(0, element.style.left.length-2));
     let positionTop = parseInt(element.style.top.substring(0, element.style.top.length-2));
 
-    if(direction == 0){
-
-        if(positionTop >= 50) {
+    if (direction == 0) { // Nord
+        if (positionTop >= 50) {
             element.style.top = positionTop - 50 + "px";
-        }
-        else{
+            rotateCharacter(element, 270);
+        } else {
             moved = false;
-        } 
-
-    } else if(direction ==1){
-
-        if(positionLeft <= 402) {
+        }
+    } else if (direction == 1) { // Est
+        if (positionLeft <= 402) {
             element.style.left = positionLeft + 50 + "px";
-        }
-        else{
+            rotateCharacter(element, 0);
+        } else {
             moved = false;
-        } 
-
-    }else if(direction == 2){
-
-        if(positionTop <= 402) {
+        }
+    } else if (direction == 2) { // Sud
+        if (positionTop <= 402) {
             element.style.top = positionTop + 50 + "px";
-        }
-        else{
+            rotateCharacter(element, 90);
+        } else {
             moved = false;
-        } 
-
-    } else {
-
-        if(positionLeft >= 50) {
-            let step = -50;
+        }
+    } else { // Ovest
+        if (positionLeft >= 50) {
             element.style.left = positionLeft - 50 + "px";
-        }
-        else{
+            rotateCharacter(element, 180);
+        } else {
             moved = false;
-        } 
+        }
     }
 
     return moved;
@@ -168,39 +159,42 @@ let y = stanza.clientHeight;
 
 document.addEventListener("keydown", moveWASD);
 
-function moveWASD(evento) { // funzione che gestisce gli input di movimento da tastiera con tasti WASD oppure con le freccette
-    if (detectCollision == true){
-        keyboardEnabled;
-    } else{
+function moveWASD(evento) {
     let tasto = evento.keyCode;
-
     let est = guard.style.left;
     let nord = guard.style.top;
 
-    if (tasto == 68 || tasto == 39) { // D
+    if (tasto == 68 || tasto == 39) { // D → Destra
         est = Number(est.substring(0, est.length - 2)) + 50;
         if (est < x - guard.clientWidth) {
             guard.style.left = est + "px";
+            rotateCharacter(guard, 0);
         }
-    } else if (tasto == 65 || tasto == 37) { // A
+    } else if (tasto == 65 || tasto == 37) { // A → Sinistra
         est = Number(est.substring(0, est.length - 2)) - 50;
         if (est >= 0) {
             guard.style.left = est + "px";
+            rotateCharacter(guard, 180);
         }
-    } else if (tasto == 87 || tasto == 38 ) { // W
+    } else if (tasto == 87 || tasto == 38) { // W → Su
         nord = Number(nord.substring(0, nord.length - 2)) - 50;
         if (nord >= 0) {
             guard.style.top = nord + "px";
+            rotateCharacter(guard, 270);
         }
-    } else if (tasto == 83 || tasto == 40 ) { // S
+    } else if (tasto == 83 || tasto == 40) { // S → Giù
         nord = Number(nord.substring(0, nord.length - 2)) + 50;
         if (nord < y - guard.clientHeight) {
             guard.style.top = nord + "px";
+            rotateCharacter(guard, 90);
         }
     }
 
     moveThief();
     detectCollision();
     updateMoves();
-    }
+}
+
+function rotateCharacter(character, angle) {
+    character.style.transform = `rotate(${angle}deg)`;
 }
