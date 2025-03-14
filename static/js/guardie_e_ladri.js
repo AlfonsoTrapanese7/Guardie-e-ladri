@@ -131,11 +131,26 @@ function updateMoves() { // conta le mosse effettuate e le mostra a schermo, in 
         document.getElementById("pulsante2").style.display = "block";
         document.getElementById("guardia-sprite").src = "static/imgs/guard-exhausted.png";
         setTimeout(() => alert("HAI PERSO"), 100);
+        startThiefEscape(); 
     }
 
     document.getElementById("esito").innerHTML = "Numero mosse: " + nMoves;
     
 }
+
+function startThiefEscape() {
+    // Avvia il movimento automatico del ladro verso destra
+    let escapeInterval = setInterval(function() {
+        moveThief();
+        if (parseInt(thief.style.left) >= document.getElementById("stanza").clientWidth - thief.clientWidth) {
+            clearInterval(escapeInterval);  // Arresta l'intervallo una volta che il ladro esce dallo schermo
+            setTimeout(() => alert("Il ladro è scappato! Hai perso!"), 10);
+            document.getElementById("pulsanti").style.display = "none";
+            document.getElementById("pulsante2").style.display = "block"; // Mostra il pulsante di ritenta
+        }
+    }, 500); // Ogni 500ms il ladro si sposterà di 50px a destra
+}
+
 
 function setButtonDisabled(disabled) { // disabilita/abilita i bottoni in base al parametro (true = disabilita, false = abilita)
 
